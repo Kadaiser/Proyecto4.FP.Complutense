@@ -1,5 +1,6 @@
 #ifndef GESTOR_H
 #define GESTOR_H
+
 using namespace std;
 
 #include "listaCorreos.h"

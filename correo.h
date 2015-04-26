@@ -1,9 +1,5 @@
 #ifndef CORREO_H
 #define CORREO_H
-#include <iostream>
-#include <string>
-#include <fstream>
-#include <ctime>
 
 using namespace std;
 

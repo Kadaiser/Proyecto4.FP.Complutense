@@ -1,7 +1,7 @@
 #ifndef USUARIO_H
 #define USUARIO_H
-#include <iostream>
-#include <string>
+
+
 #include "listaRegistros.h"
 
 using namespace std;

@@ -1,5 +1,6 @@
 #ifndef LISTAREGISTRO_H
 #define LISTAREGISTRO_H
+
 using namespace std;
 
 const int MAXREGISTROS = 100;

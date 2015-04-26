@@ -4,6 +4,7 @@ using namespace std;
 #include <fstream>
 #include <Windows.h>
 #include <string>
+
 #include "gestor.h"
 
 const string DOMINIO = "fdimail.com";
@@ -20,6 +21,7 @@ int main(){
 
 tGestor gestor;
 int opcion;
+	cout << "Bienvenido" << endl;
 
 	if(!arrancar(gestor,DOMINIO)){
 	cout << "se arranca con listas vacias";
@@ -28,11 +30,11 @@ int opcion;
 			switch(opcion){
 				case 1:
 				if(iniciarSesion(gestor))
-					//gestionarSesion(gestor);
+					gestionarSesion(gestor);
 					break;
 				case 2:
 				if(crearCuenta(gestor))
-					//gestionarSesion(gestor);
+					gestionarSesion(gestor);
 				break;
 			}
 			

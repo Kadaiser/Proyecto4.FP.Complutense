@@ -1,8 +1,5 @@
 #ifndef LISTAUSUARIOS_H
 #define LISTAUSUARIOS_H
-#include <iostream>
-#include <string>
-#include <fstream>
 
 using namespace std;
 

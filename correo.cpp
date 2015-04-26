@@ -1,8 +1,9 @@
 using namespace std;
 
 #include <iostream>
-#include <fstream>
 #include <string>
+#include <fstream>
+#include <ctime>
 #include "correo.h"
 
 

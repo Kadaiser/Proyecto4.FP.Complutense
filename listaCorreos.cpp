@@ -27,18 +27,18 @@ bool buscar(const tListaCorreos &correos, string id, int &pos){
 	while(ini<=fin && !encontrado){		//Mientras que mi rango de busqueda exista y no haya encontrado el elemento
 		mitad = (ini+fin) / 2;
 
-		if(id < correos.listaCorreos[mitad].identificador){
+		if(id < correos.listaCorreos[mitad].identificador){			//acoto mi rango de busqueda por la derecha
 		fin = mitad - 1;
 		}
-		else if(correos.listaCorreos[mitad].identificador < id){
+		else if(correos.listaCorreos[mitad].identificador < id){	//acoto mi rango de busqueda por la izquierda
 		ini = mitad + 1;
 		}
-		else{
+		else{							//Si el elemtno comparado no es mayor ni menor, entonces es el que busco.
 		encontrado = true;
 		}
 	}
-	if(encontrado) pos = mitad;
-	else pos = ini;
+	if(encontrado) pos = mitad;			//almacena la posicion que le correpsonde en el indice de la lista
+	else pos = ini;						//en caso de no encontrarlo, nos indica la posicion del indice donde deberia estar.
 	
 	return encontrado;
 }
