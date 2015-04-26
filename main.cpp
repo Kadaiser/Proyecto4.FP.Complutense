@@ -1,14 +1,14 @@
-using namespace std;
-
 #include <iostream>
 #include <fstream>
 #include <Windows.h>
 #include <string>
 
+using namespace std;
+
 #include "gestor.h"
 
 const string DOMINIO = "fdimail.com";
-
+const string CENTINELA= "XXX";
 
 int menu();
 
@@ -36,11 +36,9 @@ int opcion;
 				if(crearCuenta(gestor))
 					gestionarSesion(gestor);
 				break;
-			}
-			
+			}	
 		}while(opcion != 0);
 	}
-
 system("pause");
 }
 
