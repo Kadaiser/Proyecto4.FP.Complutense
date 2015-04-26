@@ -10,6 +10,7 @@ using namespace std;
 const string DOMINIO = "fdimail.com";
 
 int menu();
+void menuEntrada();
 
 
 /**
@@ -20,12 +21,16 @@ int main(){
 
 tGestor gestor;
 int opcion;
-	cout << "Bienvenido" << endl;
+
 
 	if(!arrancar(gestor,DOMINIO)){
-	cout << "se arranca con listas vacias";
+		cout << "No se ha podido acceder a los ficheros. Se arranca con listas vacias" << endl;
+		system("pause");
+		system("cls");
+	}
 		do{
 			opcion = menu();
+			system("cls");
 			switch(opcion){
 				case 1:
 				if(iniciarSesion(gestor))
@@ -37,7 +42,6 @@ int opcion;
 				break;
 			}	
 		}while(opcion != 0);
-	}
 system("pause");
 }
 
@@ -46,13 +50,23 @@ system("pause");
 
 int menu(){
 	int opcion;
+		menuEntrada();
 		cin >> opcion;
 		cin.sync();
 		
-		while(opcion <0 || opcion >2){
-			cout << "Opcion no valida, por favor intruduzca una opcion" << endl;			
+		while(opcion <0 || opcion >2){		
 			cin >> opcion;
 			cin.sync();
 		}
 	return opcion;
+}
+
+void menuEntrada(){
+	
+		cout << "Elija la opcion deseada:" << endl;
+		cout << "1- Acceder a mi cuenta de correo" << endl;
+		cout << "2- Crear cuenta de correo" << endl << endl;
+		cout << "0- Salir" << endl;
+		cout << "Opcion: ";
+	
 }
