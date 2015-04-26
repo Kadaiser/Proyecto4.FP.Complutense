@@ -24,7 +24,7 @@ bool cargar(tListaCorreos &correos, string dominio){
 		tCorreo correo;
 		while (cargar(correo,archivo)){ //&& listaLlena()
 		
-		//aniadir(lista, correo);
+		insertar(correos, correo);
 		}
 		archivo.close();
 		ok = true;
@@ -33,6 +33,20 @@ bool cargar(tListaCorreos &correos, string dominio){
 }
 
 void guardar(const tListaCorreos &correos, string dominio){
+	ofstream archivo;
+	string nombreFichero = dominio + ficheroCorreos;
+	
+	archivo.open(nombreFichero);
+	if(!archivo.is_open()){
+	cout << "Error al guardar la lista de correos en el fichero" << endl;
+	}
+	else{
+		for (int i= 0; i < correos.contador; i++){
+		
+		//escribir(correos, archivo);
+		}
+		archivo.close();
+	}
 }
 
 bool insertar(tListaCorreos &correos, const tCorreo &correo){
