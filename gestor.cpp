@@ -46,4 +46,5 @@ void gestionarSesion(tGestor& gestor){
 }
 
 void mostrarInterfazUsuario(tGestor& gestor){
+	cout << "correo de " <<endl ;
 }

@@ -7,6 +7,8 @@ using namespace std;
 #include "listaRegistros.h"
 #include "listaUsuarios.h"
 
+const string DOMINIO = "fdimail.com";
+
 typedef struct{
 	string dominio;
 	int usuarioActivo;
@@ -45,7 +47,7 @@ bool iniciarSesion(tGestor &gestor);
 * valida que existe y si es así, lo marca como correo leído. A continuación, busca el correo en la lista de correos y si lo encuentra 
 * lo muestra en la pantalla de lectura del correo.
 */
-void leerCorreo(tGestor& gestor, tListaRegistros& listaReg);
+void leerCorreo(tGestor& gestor, tListaRegistros& registros);
 
 
 /**
@@ -61,13 +63,13 @@ void enviarCorreo(tGestor& gestor, const tCorreo &correo);
 * Para ello, solicita el correo que el usuario quiere borrar (será el número con el que el correo es mostrado por pantalla en la bandeja correspondiente),
 * valida que existe y si es así, procede a borrarlo.
 */
-void borrarCorreo(tGestor& gestor, tListaRegistros& listaReg);
+void borrarCorreo(tGestor& gestor, tListaRegistros& registros);
 
 /**
 * Este subprograma implementa la lectura rápida de correos sin leer. El resultado es que muestra en una pantalla todos los correos sin leer ordenados
 * por asunto (ignorando todos los “Re: ”) y por fecha. Al finalizar su ejecución los correos sin leer quedarán marcados como leídos.
 */
-void lecturaRapida(tGestor& gestor, tListaRegistros& listaReg);
+void lecturaRapida(tGestor& gestor, tListaRegistros& registros);
 
 /**
 *	Esta funcion muestra la interfaz de usuario y toma una opcion a partir del menu de opciones de la sesion de usuario ya arrancada

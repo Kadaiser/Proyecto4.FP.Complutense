@@ -7,7 +7,6 @@ using namespace std;
 
 #include "gestor.h"
 
-const string DOMINIO = "fdimail.com";
 
 int menu();
 void menuEntrada();
