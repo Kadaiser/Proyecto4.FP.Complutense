@@ -1,32 +1,41 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "listaRegistros.h"
 
 using namespace std;
 
-void inicializar(tListaRegistros &listaReg){
+#include "listaRegistros.h"
+
+
+void inicializar(tListaRegistros &registros){
+	registros.contador = 0;
 }
 
-void cargar(tListaRegistros &listaReg, ifstream& archivo){
+void cargar(tListaRegistros &registros, ifstream& archivo){
+	inicializar(registros);
+	archivo >> registros.contador;
+	for(int i = 0; i < registros.contador; i++){
+		//cargarRegistro();
+		//añadirRegistro();
+	}
 }
 
-void guardar(const tListaRegistros &listaReg, ofstream& archivo){
+void guardar(const tListaRegistros &registros, ofstream& archivo){
 }
 
-bool insertar(tListaRegistros &listaReg, tRegistro registro){
+bool insertar(tListaRegistros &registros, tRegistro registro){
 return true;
 }
 
-bool borrar(tListaRegistros &listaReg, string id){
+bool borrar(tListaRegistros &registros, string id){
 return true;
 }
 
-bool correoLeido(tListaRegistros &listaReg, string id){
+bool correoLeido(tListaRegistros &registros, string id){
 return true;
 }
 
-int buscar(const tListaRegistros &listaReg, string id){
-	int pos;
+int buscar(const tListaRegistros &registros, string id){
+	int pos = 0;
 	return pos;
 }

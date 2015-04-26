@@ -14,21 +14,21 @@ void inicializar(tListaUsuarios &usuarios){
 
 bool cargar(tListaUsuarios& usuarios, string dominio){
 	bool ok;
-	ifstream fichero;
+	ifstream archivo;
 	inicializar(usuarios);
 	string nombreFichero = dominio + ficheroUsuarios;
 	
-	fichero.open(nombreFichero);
-	if(!fichero.is_open()){
+	archivo.open(nombreFichero);
+	if(!archivo.is_open()){
 	ok = false;
 	}
 	else{
 		tUsuario usuario;
-		while (cargar(usuario,fichero)){ //&& listaLlena()
+		while (cargar(usuario,archivo)){ //&& listaLlena()
 		
-		//añadir(lista, usuario);
+		//aniadir(lista, usuario);
 		}
-		fichero.close();
+		archivo.close();
 		ok = true;
 	}
 	return ok;

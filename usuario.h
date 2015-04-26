@@ -1,10 +1,11 @@
 #ifndef USUARIO_H
 #define USUARIO_H
 
+using namespace std;
+
+const string CENTINELA= "XXX";
 
 #include "listaRegistros.h"
-
-using namespace std;
 
 typedef struct{
 string identificador;

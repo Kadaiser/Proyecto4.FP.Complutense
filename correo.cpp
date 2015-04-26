@@ -1,9 +1,10 @@
-using namespace std;
-
 #include <iostream>
 #include <string>
 #include <fstream>
 #include <ctime>
+
+using namespace std;
+
 #include "correo.h"
 
 

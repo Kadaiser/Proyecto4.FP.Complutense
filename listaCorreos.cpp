@@ -1,7 +1,8 @@
-using namespace std;
 #include <iostream>
 #include <fstream>
 #include <string>
+
+using namespace std;
 
 #include "listaCorreos.h"
 
@@ -10,7 +11,25 @@ void inicializar(tListaCorreos &correos){
 }
 
 bool cargar(tListaCorreos &correos, string dominio){
-return true;
+	bool ok;
+	ifstream archivo;
+	inicializar(correos);
+	string nombreFichero = dominio + ficheroCorreos;
+	
+	archivo.open(nombreFichero);
+	if(!archivo.is_open()){
+	ok = false;
+	}
+	else{
+		tCorreo correo;
+		while (cargar(correo,archivo)){ //&& listaLlena()
+		
+		//aniadir(lista, correo);
+		}
+		archivo.close();
+		ok = true;
+	}
+	return ok;
 }
 
 void guardar(const tListaCorreos &correos, string dominio){

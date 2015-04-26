@@ -5,7 +5,7 @@ using namespace std;
 
 #include "usuario.h"
 
-const string ARCHIVO = "fdimail.com_Usuarios.txt";
+const string ficheroUsuarios = "Usuarios.txt";
 const int MAXUSUARIOS = 100;
 
 typedef struct{

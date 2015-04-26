@@ -1,9 +1,11 @@
 #ifndef LISTACORREOS_H
 #define LISTACORREOS_H
+
 using namespace std;
 
 #include "correo.h"
 
+const string ficheroCorreos = "ListaCorreo.txt";
 const int MAXCORREOS = 100;
 
 typedef struct{

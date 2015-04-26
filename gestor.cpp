@@ -1,11 +1,13 @@
-using namespace std;
 #include <iostream>
 #include <string>
+
+using namespace std;
 
 #include "gestor.h"
 
 bool arrancar(tGestor& gestor, string dominio){
-return true;
+	//inicializar(gestor, dominio);//igual es inecesario, se trara de inicializar las listas
+	return (cargar(gestor.usuarios, dominio) && cargar(gestor.correos, dominio));
 }
 
 void apagar(const tGestor &gestor){
