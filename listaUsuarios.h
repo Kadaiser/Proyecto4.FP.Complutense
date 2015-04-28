@@ -41,4 +41,10 @@ bool aniadir(tListaUsuarios& usuarios, const tUsuario& usuario);
 * y si no existe en la lista, la posición que le correspondería y el valor false. (IMPLEMENTADA)
 */
 bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion);
+
+/**
+* 
+*/
+
+bool verificarIdentificador(const tListaUsuarios& usuarios, tUsuario & usuario);
 #endif

@@ -13,9 +13,23 @@ bool arrancar(tGestor& gestor, string dominio){
 void apagar(const tGestor &gestor){
 }
 
+
 bool crearCuenta(tGestor &gestor){
-return true;
+	bool ok = false;
+	tUsuario usuario;
+		
+		if(verificarIdentificador(gestor.usuarios, usuario)){	
+			crearUsuario(usuario);
+				if(aniadir(gestor.usuarios, usuario))
+					ok = true;
+				else{
+					cout << "No pudo incluirse el usuario en la lista de usuarios";
+				}
+			}	
+	return ok;
 }
+
+
 
 bool iniciarSesion(tGestor &gestor){
 return true;

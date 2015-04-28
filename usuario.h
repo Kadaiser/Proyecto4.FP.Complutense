@@ -30,8 +30,13 @@ void guardar(const tUsuario& usuario, ofstream& archivo);
 void inicializar(tUsuario& usuario, string id, string contrasenia);
 
 /**
-*Recibe una contraseña y un usuario y devuelve si la contraseña es correcta o no.
+* Recibe una contraseña y un usuario y devuelve si la contraseña es correcta o no.
 */
 bool validarContrasenia(const tUsuario &usuario, string contrasenia);
 
+/**
+* Solicita al usuario todos los datos pertienentes para generar una estructura de usuario
+* Si la generacion del usuario es correcta, se devuelve true y un usuario.
+*/
+void crearUsuario(tUsuario& usuario);
 #endif

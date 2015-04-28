@@ -63,3 +63,20 @@ bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion){
 	
 	return encontrado;
 }
+
+
+bool verificarIdentificador(const tListaUsuarios& usuarios, tUsuario & usuario){
+	bool ok = true;
+	int pos;
+	
+	cout << "Elija un identificador de cuenta: ";
+	cin >> usuario.identificador;
+	cin.sync();
+		while(buscarUsuario(usuarios, usuario.identificador, pos)){
+			cout << "Usuario no disponible, por favor, escoja otro identificador: " << endl;
+			cin >> usuario.identificador;
+			cin.sync();
+		}
+
+	return ok;
+}

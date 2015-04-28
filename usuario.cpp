@@ -28,3 +28,10 @@ void inicializar(tUsuario& usuario, string id, string contrasenia){
 bool validarContrasenia(const tUsuario &usuario, string contrasenia){
 return true;
 }
+
+void crearUsuario(tUsuario& usuario){
+			cout << "introduzca un password (sin espacios): ";
+			cin >> usuario.contrasenia;
+			inicializar(usuario.bandejaEntrada);
+			inicializar(usuario.bandejaSalida);
+}
