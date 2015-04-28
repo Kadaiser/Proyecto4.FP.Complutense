@@ -17,6 +17,7 @@ void apagar(const tGestor &gestor){
 bool crearCuenta(tGestor &gestor){
 	bool ok = false;
 	tUsuario usuario;
+	int pos;
 		
 		if(verificarIdentificador(gestor.usuarios, usuario)){	
 			crearUsuario(usuario);

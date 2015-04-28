@@ -38,7 +38,17 @@ void guardar(const tListaUsuarios& usuarios, string dominio){
 }
 
 bool aniadir(tListaUsuarios& usuarios, const tUsuario& usuario){
-return true;
+	bool ok = false;
+	int pos;
+	
+	if(usuarios.contador == MAXUSUARIOS);
+	else{
+		buscarUsuario(usuarios, usuario.identificador, pos); //Buscamos la posicion de la lista donde incluir al usuario
+		usuarios.usuario[pos]= usuario;
+		usuarios.contador++;
+		ok =true;
+	}
+return ok;
 }
 
 bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion){

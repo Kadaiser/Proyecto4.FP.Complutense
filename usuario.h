@@ -36,7 +36,6 @@ bool validarContrasenia(const tUsuario &usuario, string contrasenia);
 
 /**
 * Solicita al usuario todos los datos pertienentes para generar una estructura de usuario
-* Si la generacion del usuario es correcta, se devuelve true y un usuario.
 */
 void crearUsuario(tUsuario& usuario);
 #endif
