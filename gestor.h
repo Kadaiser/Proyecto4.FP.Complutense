@@ -79,6 +79,8 @@ void gestionarSesion(tGestor& gestor);
 /**
 *	Este subprograma muestra la interfaz basica del gestor 
 */
-void mostrarInterfazUsuario(tGestor& gestor);
+void mostrarInterfazUsuario(tGestor& gestor, bool bandejaEntrada);
 
+void mostrarMenu(bool bandejaEntrada);
+void lineaIntercalada();
 #endif
