@@ -14,7 +14,7 @@ bool cargar(tListaCorreos &correos, string dominio){
 	bool ok;
 	ifstream archivo;
 	inicializar(correos);
-	string nombreFichero = dominio + ficheroCorreos;
+	string nombreFichero = dominio + "_" + ficheroCorreos;
 	
 	archivo.open(nombreFichero);
 	if(!archivo.is_open()){
@@ -22,7 +22,7 @@ bool cargar(tListaCorreos &correos, string dominio){
 	}
 	else{
 		tCorreo correo;
-		while (cargar(correo,archivo)){ //&& listaLlena()
+		while (cargar(correo, archivo)){
 		
 		insertar(correos, correo);
 		}
@@ -34,7 +34,7 @@ bool cargar(tListaCorreos &correos, string dominio){
 
 void guardar(const tListaCorreos &correos, string dominio){
 	ofstream archivo;
-	string nombreFichero = dominio + ficheroCorreos;
+	string nombreFichero = dominio + "_" + ficheroCorreos;
 	
 	archivo.open(nombreFichero);
 	if(!archivo.is_open()){
@@ -50,7 +50,13 @@ void guardar(const tListaCorreos &correos, string dominio){
 }
 
 bool insertar(tListaCorreos &correos, const tCorreo &correo){
-return true;
+	bool ok = false;
+	if(correos.contador < MAXCORREOS){
+		correos.correo[correos.contador] = correo;
+		correos.contador++;
+		ok = true;
+	}
+	return ok;
 }
 
 bool buscar(const tListaCorreos &correos, string id, int &pos){
@@ -60,10 +66,10 @@ bool buscar(const tListaCorreos &correos, string id, int &pos){
 	while(ini<=fin && !encontrado){		//Mientras que mi rango de busqueda exista y no haya encontrado el elemento
 		mitad = (ini+fin) / 2;
 
-		if(id < correos.listaCorreos[mitad].identificador){			//acoto mi rango de busqueda por la derecha
+		if(id < correos.correo[mitad].identificador){			//acoto mi rango de busqueda por la derecha
 		fin = mitad - 1;
 		}
-		else if(correos.listaCorreos[mitad].identificador < id){	//acoto mi rango de busqueda por la izquierda
+		else if(correos.correo[mitad].identificador < id){	//acoto mi rango de busqueda por la izquierda
 		ini = mitad + 1;
 		}
 		else{							//Si el elemtno comparado no es mayor ni menor, entonces es el que busco.

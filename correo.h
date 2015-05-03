@@ -2,6 +2,8 @@
 #define CORREO_H
 
 using namespace std;
+const string CENTINELACORREO= "XXX";
+const string CENTINELACUERPO= "X";
 
 typedef time_t tFecha;
 

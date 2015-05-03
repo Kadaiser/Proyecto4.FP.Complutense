@@ -34,8 +34,7 @@ void inicializar(tUsuario& usuario, string id, string contrasenia);
 */
 bool validarContrasenia(const tUsuario &usuario, string contrasenia);
 
-/**
-* Solicita al usuario todos los datos pertienentes para generar una estructura de usuario
-*/
-void crearUsuario(tUsuario& usuario);
+
+void mostarBandeja(const tUsuario & usuario, bool bEntrada);
+
 #endif

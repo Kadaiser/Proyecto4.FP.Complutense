@@ -25,7 +25,6 @@ int opcion;
 	if(!arrancar(gestor,DOMINIO)){
 		cout << "No se ha podido acceder a los ficheros. Se arranca con listas vacias" << endl;
 		system("pause");
-		system("cls");
 	}
 		do{
 			opcion = menu();
@@ -41,6 +40,7 @@ int opcion;
 				break;
 			}	
 		}while(opcion != 0);
+		apagar(gestor);
 system("pause");
 }
 
@@ -48,11 +48,11 @@ system("pause");
 
 
 int menu(){
+	system("cls");
 	int opcion;
 		menuEntrada();
 		cin >> opcion;
 		cin.sync();
-		
 		while(opcion <0 || opcion >2){		
 			cin >> opcion;
 			cin.sync();

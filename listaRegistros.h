@@ -57,4 +57,5 @@ bool correoLeido(tListaRegistros &registros, string id);
 */
 int buscar(const tListaRegistros &registros, string id);
 
+void cargarRegistro(tRegistro& registro, ifstream& archivo);
 #endif

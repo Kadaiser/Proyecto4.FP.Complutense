@@ -12,11 +12,16 @@ void inicializar(tListaRegistros &registros){
 }
 
 void cargar(tListaRegistros &registros, ifstream& archivo){
+	int elementos;
+	tRegistro registro;
+	
 	inicializar(registros);
-	archivo >> registros.contador;
-	for(int i = 0; i < registros.contador; i++){
-		//cargarRegistro();
-		//añadirRegistro();
+	archivo >> elementos;
+	if(elementos>0){
+		for(int i = 0; i < elementos; i++){
+			cargarRegistro(registro, archivo);
+			insertar(registros, registro);
+		}
 	}
 }
 
@@ -24,7 +29,13 @@ void guardar(const tListaRegistros &registros, ofstream& archivo){
 }
 
 bool insertar(tListaRegistros &registros, tRegistro registro){
-return true;
+	bool ok = false;
+	if(registros.contador < MAXREGISTROS){
+		registros.registro[registros.contador] = registro;
+		registros.contador++;
+		ok = true;
+	}
+	return ok;
 }
 
 bool borrar(tListaRegistros &registros, string id){
@@ -59,4 +70,10 @@ int buscar(const tListaRegistros &registros, string id){
 	else posicion = ini;
 	
 	return posicion;
+}
+
+
+void cargarRegistro(tRegistro& registro, ifstream& archivo){
+		archivo >>registro.identificador;
+		archivo >>registro.leido;
 }

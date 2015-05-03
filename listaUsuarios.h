@@ -38,14 +38,9 @@ bool aniadir(tListaUsuarios& usuarios, const tUsuario& usuario);
 
 /**
 * Dado un identificador de usuario y la lista, devuelve, si dicho identificador existe en la lista, su posición y el valor true, 
-* y si no existe en la lista, la posición que le correspondería y el valor false. (IMPLEMENTADA)
+* y si no existe en la lista, la posición que le correspondería y el valor false.
 */
 bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion);
 
-/**
-* Solicita al usuario un identificador de cuenta, verifica que dicho identificador esta disponible en la lista de usuarios,
-* si esta disponible, se incluira el identificador a la estructura de un usuario nuevo, y devuelve true. La funcion solicitara indefinidamente un identificador hasta que se introduzca uno disponible.
-*/
 
-bool verificarIdentificador(const tListaUsuarios& usuarios, tUsuario & usuario);
 #endif

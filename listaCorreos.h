@@ -9,7 +9,7 @@ const string ficheroCorreos = "ListaCorreo.txt";
 const int MAXCORREOS = 100;
 
 typedef struct{
-	tCorreo listaCorreos[MAXCORREOS];
+	tCorreo correo[MAXCORREOS];
 	int contador;
 } tListaCorreos;
 

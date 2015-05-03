@@ -16,7 +16,7 @@ bool cargar(tListaUsuarios& usuarios, string dominio){
 	bool ok;
 	ifstream archivo;
 	inicializar(usuarios);
-	string nombreFichero = dominio + ficheroUsuarios;
+	string nombreFichero = dominio + "_" + ficheroUsuarios;
 	
 	archivo.open(nombreFichero);
 	if(!archivo.is_open()){
@@ -24,9 +24,8 @@ bool cargar(tListaUsuarios& usuarios, string dominio){
 	}
 	else{
 		tUsuario usuario;
-		while (cargar(usuario,archivo)){ //&& listaLlena()
-		
-		//aniadir(lista, usuario);
+		while (cargar(usuario,archivo)){
+		aniadir(usuarios, usuario);
 		}
 		archivo.close();
 		ok = true;
@@ -41,10 +40,9 @@ bool aniadir(tListaUsuarios& usuarios, const tUsuario& usuario){
 	bool ok = false;
 	int pos;
 	
-	if(usuarios.contador == MAXUSUARIOS);
+	if(usuarios.contador >= MAXUSUARIOS);
 	else{
-		buscarUsuario(usuarios, usuario.identificador, pos); //Buscamos la posicion de la lista donde incluir al usuario
-		usuarios.usuario[pos]= usuario;
+		usuarios.usuario[usuarios.contador]= usuario;
 		usuarios.contador++;
 		ok =true;
 	}
@@ -72,21 +70,4 @@ bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion){
 	else posicion = ini;
 	
 	return encontrado;
-}
-
-
-bool verificarIdentificador(const tListaUsuarios& usuarios, tUsuario & usuario){
-	bool ok = true;
-	int pos;
-	
-	cout << "Elija un identificador de cuenta: ";
-	cin >> usuario.identificador;
-	cin.sync();
-		while(buscarUsuario(usuarios, usuario.identificador, pos)){
-			cout << "Usuario no disponible, por favor, escoja otro identificador: " << endl;
-			cin >> usuario.identificador;
-			cin.sync();
-		}
-
-	return ok;
 }

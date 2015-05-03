@@ -77,10 +77,20 @@ void lecturaRapida(tGestor& gestor, tListaRegistros& registros);
 void gestionarSesion(tGestor& gestor);
 
 /**
-*	Este subprograma muestra la interfaz basica del gestor 
+* Este subprograma muestra la interfaz basica del gestor, recibe un booleano que controla cual de las dos bandejas de mensajes (Entrada/Salida) debe mostrar
+* en la vista rapida. 
 */
-void mostrarInterfazUsuario(tGestor& gestor, bool bandejaEntrada);
+void mostrarInterfazUsuario(tGestor& gestor, bool bEntrada);
 
-void mostrarMenu(bool bandejaEntrada);
+/**
+* Muestra las disttintas opciones del usuario activo en el gestor, recibe un parametro booleano que controla si debe mostrar la la cabecera de bandeja entrada/salida,
+* asi como modificar la opcion 4 del interfaz (ver bandeja entrada/salida).
+*/
+void mostrarMenu(bool bEntrada);
+
+/**
+* Genera una linea horizontal de guiones diseñada para ocupar la longitud estandar de una consola de sistema de windows
+*/
 void lineaIntercalada();
+
 #endif
