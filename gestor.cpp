@@ -13,7 +13,11 @@ bool arrancar(tGestor& gestor, string dominio){
 
 
 void apagar(const tGestor &gestor){
-	
+	system("cls");
+	cout << "Cerrando gestor de correo " << gestor.dominio << endl;
+	//guardar(gestor.usuarios, gestor.dominio);
+	guardar(gestor.correos, gestor.dominio);
+	system("pause");
 	
 }
 
@@ -42,7 +46,7 @@ bool crearCuenta(tGestor &gestor){
 			if(aniadir(gestor.usuarios, usuario)) ok = true;
 			else cout << "No pudo incluirse el usuario en la lista de usuarios";
 
-		cout << "Se genero su usuario correctamente." << endl << "Va a iniciar su primera sesion en " << gestor.dominio << endl;
+		cout << "Se genero su cuenta correctamente." << endl << "Va a iniciar su primera sesion en " << gestor.dominio << endl;
 		gestor.usuarioActivo = gestor.usuarios.contador - 1;
 		system("pause");
 return ok;
@@ -73,7 +77,7 @@ bool iniciarSesion(tGestor &gestor){
 			}
 		}
 		else{
-			cout << "Usuario no existe, regresando a menu principal"<< endl;
+			cout << "Cuenta no existe, regresando a menu principal"<< endl;
 		}
 	system("pause");
 return ok;

@@ -13,7 +13,6 @@ typedef struct{
 	string dominio;
 	int usuarioActivo;
 	tListaCorreos correos;
-	tListaRegistros registros;
 	tListaUsuarios usuarios;
 }tGestor;
 
