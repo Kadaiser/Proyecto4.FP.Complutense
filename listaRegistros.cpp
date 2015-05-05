@@ -46,7 +46,13 @@ return true;
 }
 
 bool correoLeido(tListaRegistros &registros, string id){
-return true;
+	bool check = false;
+	int posicion = buscar(registros,id);
+	if(posicion != -1)
+	registros.registro[posicion].leido = true
+		check = true;
+	else 
+		return 	check;
 }
 
 
