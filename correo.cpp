@@ -12,11 +12,11 @@ void correoNuevo(tCorreo &correo, string emisor){
 
 		correo.fecha = time(0);
 		correo.emisor= emisor;
-		correo.identificador = correo.emisor + "_" + char(correo.fecha);
-		//correoDestino(correo.destinantario);
-		//correoAsunto(correo.asunto);
-		//correoCuerpo(correo.cuerpo);
-		
+		correo.identificador = correo.emisor + "_" + to_string(correo.fecha);
+		correoDestino(correo.destinantario);
+		correoAsunto(correo.asunto);
+		correoCuerpo(correo.cuerpo);
+		cout << "El correo se ha enviado a tu bandeja de salida" << endl;
 }
 
 void correoContestacion(const tCorreo &correoOriginal, tCorreo &correo, string emisor){
@@ -60,7 +60,6 @@ void guardar(const tCorreo &correo, ofstream& archivo){
 
 void leerCuerpo(string& cuerpo, ifstream& archivo){
 	string centinela, linea;
-	stringstream flujo;
 	do{
 		centinela = archivo.get();
 		if(centinela != CENTINELACUERPO){
@@ -71,11 +70,37 @@ void leerCuerpo(string& cuerpo, ifstream& archivo){
 	}while(centinela != CENTINELACUERPO);
 }
 
-/**
-string resultado;
-string nombre= “Pepe”;
-stringstream flujo; // Flujo
-flujo << “Hola “ << nombre << endl; // Pasamos datos al flujo
-resultado=flujo.str(); // Generamos un string
-// Al final resultado contendrá la cadena “Hola Pepe\n”
-*/
+void correoDestino(string& destinatario){
+	string destinatarioExtra;
+	do{
+		if(destinatario !=CENTINELACORREO){
+			cout << "Destinatario (Al menos uno, XXX para terminar): ";
+			cin >> destinatario;
+		}
+	}while(destinatario == CENTINELACORREO);
+	do{
+
+		cout << endl << "Destinatario (XXX para terminar): ";
+		cin >> destinatarioExtra;
+		
+		destinatario += " "; 
+		destinatario+= destinatarioExtra;
+	}while(destinatarioExtra != CENTINELACORREO);
+}
+
+void correoAsunto(string& asunto){
+	cout << "Introduce el asunto (una linea): ";
+	getline(cin, asunto);
+	cin.sync();
+}
+
+void correoCuerpo(string& cuerpo){
+	string linea;
+	stringstream flujo;
+	cout << "Escribe tu mensaje (XXX para terminar): " << endl;
+		do{
+			getline(cin, linea);
+			if(linea != CENTINELACORREO)flujo << linea << endl;
+		}while(linea != CENTINELACORREO);
+	cuerpo=flujo.str();
+}

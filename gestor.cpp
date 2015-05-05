@@ -17,7 +17,6 @@ void apagar(const tGestor &gestor){
 	cout << "Cerrando gestor de correo " << gestor.dominio << endl;
 	guardar(gestor.usuarios, gestor.dominio);
 	guardar(gestor.correos, gestor.dominio);
-	system("pause");
 	
 }
 
@@ -91,6 +90,9 @@ void leerCorreo(tGestor& gestor, tListaRegistros& listaReg){
 
 
 void enviarCorreo(tGestor& gestor, const tCorreo &correo){
+	system("cls");
+	correoNuevo(gestor.correos.correo[gestor.correos.contador], gestor.usuarios.usuario[gestor.usuarioActivo].identificador);
+	insertar(gestor.correos, correo);
 }
 
 
@@ -112,7 +114,10 @@ void gestionarSesion(tGestor& gestor){
 		mostrarInterfazUsuario(gestor, bEntrada);
 		cin >> opcion;
 		if(opcion ==1){}
-		else if(opcion == 2){}
+		else if(opcion == 2){
+			enviarCorreo(gestor, gestor.correos.correo[gestor.correos.contador]);
+				system("pause");
+		}
 		else if(opcion == 3){}
 		else if(opcion == 4){
 			if(bEntrada == true)bEntrada = false;
