@@ -46,7 +46,13 @@ return true;
 }
 
 bool correoLeido(tListaRegistros &registros, string id){
-return true;
+	bool check = false;
+	int posicion = buscar(registros,id);
+	if(posicion != -1)
+	registros.registro[posicion].leido = true
+		check = true;
+	else 
+		return 	check;
 }
 
 
@@ -70,7 +76,7 @@ int buscar(const tListaRegistros &registros, string id){
 		}
 	}
 	if(encontrado) posicion = mitad;
-	else posicion = ini;
+	else posicion = -1;
 	
 	return posicion;
 }
