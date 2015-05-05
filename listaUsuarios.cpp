@@ -34,7 +34,23 @@ bool cargar(tListaUsuarios& usuarios, string dominio){
 }
 
 void guardar(const tListaUsuarios& usuarios, string dominio){
+	ofstream archivo;
+	string nombreFichero = dominio + "_" + ficheroUsuarios;
+	
+	archivo.open(nombreFichero);
+	if(!archivo.is_open()){
+	cout << "Error al guardar la lista de correos en el fichero" << endl;
+	}
+	else{
+		for (int i= 0; i < usuarios.contador; i++){
+		
+		guardar(usuarios.usuario[i], archivo);
+		}
+		archivo << "XXX";
+		archivo.close();
+	}
 }
+
 
 bool aniadir(tListaUsuarios& usuarios, const tUsuario& usuario){
 	bool ok = false;

@@ -15,7 +15,7 @@ bool arrancar(tGestor& gestor, string dominio){
 void apagar(const tGestor &gestor){
 	system("cls");
 	cout << "Cerrando gestor de correo " << gestor.dominio << endl;
-	//guardar(gestor.usuarios, gestor.dominio);
+	guardar(gestor.usuarios, gestor.dominio);
 	guardar(gestor.correos, gestor.dominio);
 	system("pause");
 	

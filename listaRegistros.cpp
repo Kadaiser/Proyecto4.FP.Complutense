@@ -26,6 +26,9 @@ void cargar(tListaRegistros &registros, ifstream& archivo){
 }
 
 void guardar(const tListaRegistros &registros, ofstream& archivo){
+	for(int i= 0; i < registros.contador; i++){
+		archivo << registros.registro[i].identificador << " " << registros.registro[i].leido << endl;
+	}
 }
 
 bool insertar(tListaRegistros &registros, tRegistro registro){

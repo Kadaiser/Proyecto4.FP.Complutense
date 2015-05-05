@@ -46,4 +46,8 @@ bool cargar(tCorreo &correo, ifstream& archivo);
 */
 void guardar(const tCorreo &correo, ofstream& archivo);
 
+/**
+* Genera el cuerpo del correo a partir de un flujo de entrada (ya abierto), escribe almacenandolo en una variable tipo string
+*/
+void leerCuerpo(string& cuerpo, ifstream& archivo);
 #endif

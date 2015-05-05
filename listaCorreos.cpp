@@ -43,7 +43,8 @@ void guardar(const tListaCorreos &correos, string dominio){
 	else{
 		for (int i= 0; i < correos.contador; i++){
 		
-		//escribir(correos, archivo);
+		guardar(correos.correo[i], archivo);
+		archivo << "XXX";
 		}
 		archivo.close();
 	}
