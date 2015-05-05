@@ -71,21 +71,20 @@ void leerCuerpo(string& cuerpo, ifstream& archivo){
 }
 
 void correoDestino(string& destinatario){
-	string destinatarioExtra;
+	string destino;
 	do{
-		if(destinatario !=CENTINELACORREO){
-			cout << "Destinatario (Al menos uno, XXX para terminar): ";
-			cin >> destinatario;
+		cout << "Introduce la direccion del destinatario(XXX para terminar): ";
+		cin >> destino;
+		cin.sync();
+		if(destino != CENTINELACORREO){
+			destinatario += destino;
+			destinatario += " ";
 		}
-	}while(destinatario == CENTINELACORREO);
+	}while(destino !=CENTINELACORREO);
 	do{
-
-		cout << endl << "Destinatario (XXX para terminar): ";
-		cin >> destinatarioExtra;
-		
-		destinatario += " "; 
-		destinatario+= destinatarioExtra;
-	}while(destinatarioExtra != CENTINELACORREO);
+		cin >> destino;
+		cin.sync();
+	}while(destino !=CENTINELACORREO);
 }
 
 void correoAsunto(string& asunto){
