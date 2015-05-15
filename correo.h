@@ -9,7 +9,7 @@ typedef time_t tFecha;
 
 typedef struct{
 string emisor;
-string destinantario;
+string destinatario;
 string asunto;
 string cuerpo;
 tFecha fecha;
@@ -66,7 +66,9 @@ void correoAsunto(string& asunto);
 */
 void correoCuerpo(string& cuerpo);
 
-
+/** 
+* Funcion que recibe un correo y lo muestra por pantalla, incluyendo el asunto y el cuerpo. 
+*/
 void verCorreo(tCorreo correo);
 
 #endif

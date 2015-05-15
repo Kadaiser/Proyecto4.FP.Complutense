@@ -81,6 +81,10 @@ void gestionarSesion(tGestor& gestor);
 */
 void mostrarInterfazUsuario(tGestor& gestor, bool bEntrada);
 
+/**
+* Procedimiento que muestra el contenido de una bandeja de registros de manera ordenada
+* y con '*' para mensajes no leidos
+*/
 void mostarBandeja(const tGestor & gestor, bool bEntrada);
 
 /**
@@ -94,7 +98,7 @@ void mostrarMenuVerCorreo();
 
 
 /**
-* Genera una linea horizontal de guiones diseñada para ocupar la longitud estandar de una consola de sistema de windows
+* Genera una linea horizontal de guiones diseñada para ocupar la longitud por defecto de una consola de sistema de windows
 */
 void lineaIntercalada();
 

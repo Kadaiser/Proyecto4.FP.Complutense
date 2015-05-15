@@ -14,7 +14,7 @@ void correoNuevo(tCorreo &correo, string emisor){
 		correo.fecha = time(0);
 		correo.emisor= emisor;
 		correo.identificador = correo.emisor + "_" + to_string(correo.fecha);
-		correoDestino(correo.destinantario);
+		correoDestino(correo.destinatario);
 		correoAsunto(correo.asunto);
 		correoCuerpo(correo.cuerpo);
 }
@@ -31,7 +31,7 @@ string obtenerCabecera(const tCorreo &correo){
 
 	cabecera = "De: " + correo.emisor + "\t";
 	cabecera += mostrarFecha(correo.fecha) + "\n";
-	cabecera += "Para: " + correo.destinantario + "\n";
+	cabecera += "Para: " + correo.destinatario + "\n";
 	cabecera += "Asunto: " + correo.asunto + "\n\n";
 
 	return cabecera;
@@ -47,7 +47,7 @@ bool cargar(tCorreo &correo, ifstream& archivo){
 		archivo >> correo.fecha;
 		getline(archivo, fecha);
 		getline(archivo, correo.emisor);
-		getline(archivo, correo.destinantario);
+		getline(archivo, correo.destinatario);
 		getline(archivo, correo.asunto);		
 		leerCuerpo(correo.cuerpo, archivo);
 	}
@@ -58,7 +58,7 @@ void guardar(const tCorreo &correo, ofstream& archivo){
 	archivo << correo.identificador << endl;
 	archivo << correo.fecha << endl;
 	archivo << correo.emisor << endl;
-	archivo << correo.destinantario << endl;
+	archivo << correo.destinatario << endl;
 	archivo << correo.asunto << endl;
 	archivo << correo.cuerpo;
 	archivo << 'X' << endl;

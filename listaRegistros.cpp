@@ -42,19 +42,27 @@ bool insertar(tListaRegistros &registros, tRegistro registro){
 }
 
 bool borrar(tListaRegistros &registros, string id){
-return true;
+	bool borrado = false;
+	int posicion = buscar(registros,id);
+	if(posicion != -1){
+		while(posicion < registros.contador){
+			registros.registro[posicion] = registros.registro[posicion+1];
+			posicion++;
+		}
+		registros.contador--;
+		borrado = true;
+	}
+return borrado;
 }
 
 bool correoLeido(tListaRegistros &registros, string id){
 	bool check = false;
-	
 	int posicion = buscar(registros,id);
 	
 	if(posicion != -1){
 		registros.registro[posicion].leido = true;
 		check = true;
-	}
-		
+	}	
 	return check;
 }
 

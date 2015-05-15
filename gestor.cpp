@@ -47,7 +47,7 @@ bool crearCuenta(tGestor &gestor){
 			else cout << "No pudo incluirse el usuario en la lista de usuarios";
 
 		cout << "Se genero su cuenta correctamente." << endl << "Va a iniciar su primera sesion en " << gestor.dominio << endl;
-		buscarUsuario(gestor.usuarios, identificador, gestor.usuarioActivo);
+		buscarUsuario(gestor.usuarios, identificador, gestor.usuarioActivo); //Otra forma de reutilzar la funcion de busqueda de uusuarios es para cargar el usuario activo en base al identificador recien creado
 		system("pause");
 return ok;
 }
@@ -93,14 +93,15 @@ void leerCorreo(tGestor& gestor, tListaRegistros& listaReg){
 	cin >> numCorreo;
 
 	if (numCorreo > 0 && numCorreo <= listaReg.contador){
-		listaReg.registro[numCorreo-1].leido = true;
-		buscar(gestor.correos, listaReg.registro[numCorreo-1].identificador, pos);
+		listaReg.registro[numCorreo-1].leido = true; //Al acceder a un correo ()siempre en la posicion n-1 respecto de lo que el usuario ve en la lista, se marca como leido
+		buscar(gestor.correos, listaReg.registro[numCorreo-1].identificador, pos);	//Buscar correo en la lista de correos
 		
-		verCorreo(gestor.correos.correo[pos]);
+		verCorreo(gestor.correos.correo[pos]); //Se muestra el contenido del correo
 		do{
-			mostrarMenuVerCorreo();
+			mostrarMenuVerCorreo();	//Se muestra el menu de opciones d ela lectura de correos
 			cin >> opcion;
 			if (opcion == 1){
+				//correoContestacion ()		//Se puede enviar una respuesta (Re:) al emisor; 
 			}
 		}while(opcion != 0);
 	}
@@ -116,7 +117,7 @@ void enviarCorreo(tGestor& gestor, const tCorreo &correo){
 		registro.leido = false;
 		registro.identificador = correo.identificador;
 		if (insertar(gestor.usuarios.usuario[gestor.usuarioActivo].bandejaSalida, registro)){
-			if (buscarUsuario(gestor.usuarios, correo.destinantario, pos)){				
+			if (buscarUsuario(gestor.usuarios, correo.destinatario, pos)){				
 				if (insertar(gestor.usuarios.usuario[pos].bandejaEntrada, registro)){
 					cout << "Correo enviado correctamente." << endl;
 				}
@@ -207,8 +208,7 @@ void gestionarSesion(tGestor& gestor){
 			}
 		}
 		else if(opcion == 4){
-			if(bEntrada == true)bEntrada = false;
-			else bEntrada = true;
+			bEntrada = !bEntrada;
 		}
 		else if(opcion == 5){
 			lecturaRapida(gestor, gestor.usuarios.usuario[gestor.usuarioActivo].bandejaEntrada);
@@ -246,14 +246,14 @@ void mostarBandeja(const tGestor & gestor, bool bEntrada){
 			if(!usuario.bandejaEntrada.registro[i].leido) cout << " ";
 			else cout << "*";
 			if (buscar(gestor.correos, usuario.bandejaEntrada.registro[i].identificador, pos)){
-				cout << setw(2) << i+1 << setw(10) << gestor.correos.correo[pos].emisor << setw(20) << gestor.correos.correo[pos].asunto << setw(45) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
+				cout << setw(2) << i+1 << " " << gestor.correos.correo[pos].emisor << setw(20) << gestor.correos.correo[pos].asunto << setw(35) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
 			}
 		}
 	}
 	else{
 		for(int i =0; i < usuario.bandejaSalida.contador; i++){
 			if (buscar(gestor.correos, usuario.bandejaSalida.registro[i].identificador, pos)){
-				cout << " " << setw(2) << i+1 << setw(10) << gestor.correos.correo[pos].destinantario << setw(20) << gestor.correos.correo[pos].asunto << setw(45) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
+				cout << " " << setw(2) << i+1 << " " << gestor.correos.correo[pos].destinatario << setw(20) << gestor.correos.correo[pos].asunto << setw(35) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
 			}
 		}
 	}
