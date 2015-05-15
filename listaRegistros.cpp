@@ -45,9 +45,8 @@ bool borrar(tListaRegistros &registros, string id){
 	bool borrado = false;
 	int posicion = buscar(registros,id);
 	if(posicion != -1){
-		while(posicion < registros.contador){
+				for (posicion; posicion < registros.contador; posicion++){
 			registros.registro[posicion] = registros.registro[posicion+1];
-			posicion++;
 		}
 		registros.contador--;
 		borrado = true;

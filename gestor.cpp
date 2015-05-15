@@ -136,19 +136,19 @@ void enviarCorreo(tGestor& gestor, const tCorreo &correo){
 
 
 
-void borrarCorreo(tGestor& gestor, tListaRegistros& listaReg){
+void borrarCorreo(tGestor& gestor, tListaRegistros& registros){
 	int numCorreo;
 
 	cout << "Introduzca el numero correo a borrar: ";
 	cin >> numCorreo;
 
-	if (numCorreo > 0 && numCorreo <= listaReg.contador){			
-		for (int i=numCorreo-1; i<listaReg.contador; i++){
-			listaReg.registro[i].identificador = listaReg.registro[i+1].identificador;
-			listaReg.registro[i].leido = listaReg.registro[i+1].leido;
-		}
-		listaReg.contador--;
+	if (numCorreo > 0 && numCorreo < registros.contador){			
+		if(borrar(registros, registros.registro[numCorreo - 1].identificador))
+			cout << "El mensaje se elimino de tu bandeja correctamente." << endl;
+		else
+			cout << "Correo inexistente." << endl;
 	}
+	
 }
 
 
