@@ -1,0 +1,3 @@
+- Formatear texto para que se vea bien en pantalla (setw, ...)
+- Cambiar destinantario por destinatario en correo.h y todas las paginas donde se use.
+- Falta la funcion de correoContestacion en correo.cpp

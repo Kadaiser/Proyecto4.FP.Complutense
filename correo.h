@@ -66,4 +66,7 @@ void correoAsunto(string& asunto);
 */
 void correoCuerpo(string& cuerpo);
 
+
+void verCorreo(tCorreo correo);
+
 #endif

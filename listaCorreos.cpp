@@ -61,27 +61,49 @@ bool insertar(tListaCorreos &correos, const tCorreo &correo){
 }
 
 bool buscar(const tListaCorreos &correos, string id, int &pos){
+	bool encontrado = false;
 
-	int ini = 0, fin = correos.contador-1, mitad;
-	bool encontrado = false;			//Por defecto no se ha econtrado el elemento que se busca
-	while(ini<=fin && !encontrado){		//Mientras que mi rango de busqueda exista y no haya encontrado el elemento
-		mitad = (ini+fin) / 2;
-
-		if(id < correos.correo[mitad].identificador){			//acoto mi rango de busqueda por la derecha
-		fin = mitad - 1;
+	pos = 0;
+	while (pos < correos.contador && !encontrado){
+		if (id == correos.correo[pos].identificador){
+			encontrado = true;
 		}
-		else if(correos.correo[mitad].identificador < id){	//acoto mi rango de busqueda por la izquierda
-		ini = mitad + 1;
-		}
-		else{							//Si el elemtno comparado no es mayor ni menor, entonces es el que busco.
-		encontrado = true;
-		}
+		else{
+			pos++;
+		}		
 	}
-	if(encontrado) pos = mitad;			//almacena la posicion que le correpsonde en el indice de la lista
-	else pos = ini;						//en caso de no encontrarlo, nos indica la posicion del indice donde deberia estar.
-	
 	return encontrado;
 }
 
 void ordenar_AF(tListaCorreos &correos){
+	tCorreo nuevo;
+	int pos;
+
+	for (int i = 1; i < correos.contador; i++) {
+		nuevo = correos.correo[i];
+		pos = 0;
+		while ((pos < i) && !(correos.correo[pos].fecha > nuevo.fecha)) {
+			pos++;
+		}
+
+		for (int j = i; j > pos; j--) {
+			correos.correo[j] = correos.correo[j-1];
+		}
+
+		correos.correo[pos] = nuevo;
+	}
+
+	for (int i = 1; i < correos.contador; i++) {
+		nuevo = correos.correo[i];
+		pos = 0;
+		while ((pos < i) && !(correos.correo[pos].asunto > nuevo.asunto)) {
+			pos++;
+		}
+
+		for (int j = i; j > pos; j--) {
+			correos.correo[j] = correos.correo[j-1];
+		}
+
+		correos.correo[pos] = nuevo;
+	}
 }

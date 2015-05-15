@@ -4,6 +4,7 @@
 
 using namespace std;
 
+#include "fecha.h"
 #include "gestor.h"
 
 bool arrancar(tGestor& gestor, string dominio){
@@ -46,7 +47,7 @@ bool crearCuenta(tGestor &gestor){
 			else cout << "No pudo incluirse el usuario en la lista de usuarios";
 
 		cout << "Se genero su cuenta correctamente." << endl << "Va a iniciar su primera sesion en " << gestor.dominio << endl;
-		gestor.usuarioActivo = gestor.usuarios.contador - 1;
+		buscarUsuario(gestor.usuarios, identificador, gestor.usuarioActivo);
 		system("pause");
 return ok;
 }
@@ -85,24 +86,92 @@ return ok;
 
 
 void leerCorreo(tGestor& gestor, tListaRegistros& listaReg){
+	int numCorreo, pos, opcion;
+	string cabecera, cadena;
+
+	cout << "Introduzca el numero correo a leer: ";
+	cin >> numCorreo;
+
+	if (numCorreo > 0 && numCorreo <= listaReg.contador){
+		listaReg.registro[numCorreo-1].leido = true;
+		buscar(gestor.correos, listaReg.registro[numCorreo-1].identificador, pos);
+		
+		verCorreo(gestor.correos.correo[pos]);
+		do{
+			mostrarMenuVerCorreo();
+			cin >> opcion;
+			if (opcion == 1){
+			}
+		}while(opcion != 0);
+	}
 }
 
 
 
-void enviarCorreo(tGestor& gestor, const tCorreo &correo){
-	system("cls");
-	correoNuevo(gestor.correos.correo[gestor.correos.contador], gestor.usuarios.usuario[gestor.usuarioActivo].identificador);
-	insertar(gestor.correos, correo);
+void enviarCorreo(tGestor& gestor, const tCorreo &correo){	
+	tRegistro registro;
+	int pos;
+
+	if (insertar(gestor.correos, correo)){
+		registro.leido = false;
+		registro.identificador = correo.identificador;
+		if (insertar(gestor.usuarios.usuario[gestor.usuarioActivo].bandejaSalida, registro)){
+			if (buscarUsuario(gestor.usuarios, correo.destinantario, pos)){				
+				if (insertar(gestor.usuarios.usuario[pos].bandejaEntrada, registro)){
+					cout << "Correo enviado correctamente." << endl;
+				}
+				else{
+					cout << "Bandeja de correo de destinatario llena!!!" << endl;
+				}
+
+			}
+			else{
+				cout << "Destinatario no encontrado" << endl;
+			}
+		}
+
+	}
 }
 
 
 
 void borrarCorreo(tGestor& gestor, tListaRegistros& listaReg){
+	int numCorreo;
+
+	cout << "Introduzca el numero correo a borrar: ";
+	cin >> numCorreo;
+
+	if (numCorreo > 0 && numCorreo <= listaReg.contador){			
+		for (int i=numCorreo-1; i<listaReg.contador; i++){
+			listaReg.registro[i].identificador = listaReg.registro[i+1].identificador;
+			listaReg.registro[i].leido = listaReg.registro[i+1].leido;
+		}
+		listaReg.contador--;
+	}
 }
 
 
 
 void lecturaRapida(tGestor& gestor, tListaRegistros& listaReg){
+	int pos;
+
+	system("cls");
+
+	ordenar_AF(gestor.correos);
+
+	for (int i = 0; i<listaReg.contador; i++){
+
+		if (!listaReg.registro[i].leido){
+			buscar(gestor.correos, listaReg.registro[i].identificador, pos);
+		
+			verCorreo(gestor.correos.correo[pos]);
+			listaReg.registro[i].leido = true;
+		}
+		
+		
+	}
+
+	system("pause");
 }
 
 
@@ -110,20 +179,40 @@ void lecturaRapida(tGestor& gestor, tListaRegistros& listaReg){
 void gestionarSesion(tGestor& gestor){
 	int opcion;
 	bool bEntrada= true;
+	tCorreo nuevoCorreo;
+
 	do{
 		mostrarInterfazUsuario(gestor, bEntrada);
 		cin >> opcion;
-		if(opcion ==1){}
-		else if(opcion == 2){
-			enviarCorreo(gestor, gestor.correos.correo[gestor.correos.contador]);
-				system("pause");
+		if(opcion ==1){
+			if (bEntrada){
+				leerCorreo(gestor, gestor.usuarios.usuario[gestor.usuarioActivo].bandejaEntrada);		
+			}
+			else{
+				leerCorreo(gestor, gestor.usuarios.usuario[gestor.usuarioActivo].bandejaSalida);		
+			}
 		}
-		else if(opcion == 3){}
+		else if(opcion == 2){
+			system("cls");
+			correoNuevo(nuevoCorreo, gestor.usuarios.usuario[gestor.usuarioActivo].identificador);
+			enviarCorreo(gestor, nuevoCorreo);
+			system("pause");
+		}
+		else if(opcion == 3){
+			if (bEntrada){
+				borrarCorreo(gestor, gestor.usuarios.usuario[gestor.usuarioActivo].bandejaEntrada);		
+			}
+			else{
+				borrarCorreo(gestor, gestor.usuarios.usuario[gestor.usuarioActivo].bandejaSalida);		
+			}
+		}
 		else if(opcion == 4){
 			if(bEntrada == true)bEntrada = false;
 			else bEntrada = true;
 		}
-		else if(opcion == 5){}
+		else if(opcion == 5){
+			lecturaRapida(gestor, gestor.usuarios.usuario[gestor.usuarioActivo].bandejaEntrada);
+		}
 	}while(opcion != 0);
 	system("cls");
 }
@@ -141,11 +230,33 @@ void mostrarInterfazUsuario(tGestor& gestor, bool bEntrada){
 	cout <<"L" << setw(2) << "N" << setw(10) << "EMISOR" << setw(20) << "ASUNTO" << setw(45) << "FECHA" << endl;
 	lineaIntercalada();
 
-	mostarBandeja(gestor.usuarios.usuario[gestor.usuarioActivo], bEntrada);
+	mostarBandeja(gestor, bEntrada);
 
 	lineaIntercalada();
 	mostrarMenu(bEntrada);
 	
+}
+
+void mostarBandeja(const tGestor & gestor, bool bEntrada){
+	int pos;
+	tUsuario usuario = gestor.usuarios.usuario[gestor.usuarioActivo];
+
+	if(bEntrada){
+		for(int i =  0; i< usuario.bandejaEntrada.contador; i++){
+			if(!usuario.bandejaEntrada.registro[i].leido) cout << " ";
+			else cout << "*";
+			if (buscar(gestor.correos, usuario.bandejaEntrada.registro[i].identificador, pos)){
+				cout << setw(2) << i+1 << setw(10) << gestor.correos.correo[pos].emisor << setw(20) << gestor.correos.correo[pos].asunto << setw(45) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
+			}
+		}
+	}
+	else{
+		for(int i =0; i < usuario.bandejaSalida.contador; i++){
+			if (buscar(gestor.correos, usuario.bandejaSalida.registro[i].identificador, pos)){
+				cout << " " << setw(2) << i+1 << setw(10) << gestor.correos.correo[pos].destinantario << setw(20) << gestor.correos.correo[pos].asunto << setw(45) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
+			}
+		}
+	}
 }
 
 void mostrarMenu(bool bEntrada){
@@ -160,6 +271,15 @@ void mostrarMenu(bool bEntrada){
 	cout << setw(3) << "0- Cerrar sesion" << endl;
 	lineaIntercalada();
 	cout << "Introduzca un opcion:";
+}
+
+void mostrarMenuVerCorreo(){
+	lineaIntercalada();
+	cout << "Elija una opcion:" << endl;
+	cout << setw(3) << "1- Contestar correo" << endl;
+	cout << setw(3) << "0- Volver a la bandeja" << endl;
+	lineaIntercalada();
+	cout << "Introduzca un opcion:";	
 }
 
 void lineaIntercalada(){

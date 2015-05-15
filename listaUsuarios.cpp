@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 #include <fstream>
 
@@ -54,15 +54,14 @@ void guardar(const tListaUsuarios& usuarios, string dominio){
 
 bool aniadir(tListaUsuarios& usuarios, const tUsuario& usuario){
 	bool ok = false;
-	int pos;
 	
-	if(usuarios.contador >= MAXUSUARIOS);
-	else{
+	if(usuarios.contador < MAXUSUARIOS){
 		usuarios.usuario[usuarios.contador]= usuario;
 		usuarios.contador++;
-		ok =true;
+		ordenarUsuarios(usuarios);
+		ok = true;
 	}
-return ok;
+	return ok;
 }
 
 bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion){
@@ -86,4 +85,22 @@ bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion){
 	else posicion = ini;
 	
 	return encontrado;
+}
+
+/* Variante de ordenacion por insercion */
+void ordenarUsuarios(tListaUsuarios& usuarios){
+	int pos;
+	tUsuario nuevo;
+
+	
+	nuevo = usuarios.usuario[usuarios.contador-1];
+	pos = 0;
+	while ((pos < usuarios.contador-1) && !(usuarios.usuario[pos].identificador > nuevo.identificador)) {
+		pos++;
+	}
+	for (int j = usuarios.contador-1; j > pos; j--) {
+		usuarios.usuario[j] = usuarios.usuario[j-1];
+	}
+	usuarios.usuario[pos] = nuevo;
+		
 }

@@ -81,11 +81,17 @@ void gestionarSesion(tGestor& gestor);
 */
 void mostrarInterfazUsuario(tGestor& gestor, bool bEntrada);
 
+void mostarBandeja(const tGestor & gestor, bool bEntrada);
+
 /**
 * Muestra las disttintas opciones del usuario activo en el gestor, recibe un parametro booleano que controla si debe mostrar la la cabecera de bandeja entrada/salida,
 * asi como modificar la opcion 4 del interfaz (ver bandeja entrada/salida).
 */
 void mostrarMenu(bool bEntrada);
+
+
+void mostrarMenuVerCorreo();
+
 
 /**
 * Genera una linea horizontal de guiones diseñada para ocupar la longitud estandar de una consola de sistema de windows

@@ -35,6 +35,4 @@ void inicializar(tUsuario& usuario, string id, string contrasenia);
 bool validarContrasenia(const tUsuario &usuario, string contrasenia);
 
 
-void mostarBandeja(const tUsuario & usuario, bool bEntrada);
-
 #endif

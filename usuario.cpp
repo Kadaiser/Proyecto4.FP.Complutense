@@ -42,17 +42,3 @@ bool validarContrasenia(const tUsuario &usuario, string contrasenia){
 return ok;
 }
 
-void mostarBandeja(const tUsuario & usuario, bool bEntrada){
-	if(bEntrada){
-		for(int i =  0; i< usuario.bandejaEntrada.contador; i++){
-			if(!usuario.bandejaEntrada.registro[i].leido) cout << " ";
-			else cout << "*";
-			cout << setw(2) << "-" << setw(10) << usuario.bandejaEntrada.registro[i].identificador << setw(20) << "asunto" << setw(45) << "fecha" << endl;
-		}
-	}
-	else{
-		for(int i =0; i < usuario.bandejaSalida.contador; i++){
-			cout << " "<< setw(2) << "-" << setw(10) << usuario.bandejaSalida.registro[i].identificador << setw(20) << "asunto" << setw(45) << "fecha" << endl;
-			}
-		}
-}
