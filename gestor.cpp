@@ -154,7 +154,7 @@ void borrarCorreo(tGestor& gestor, tListaRegistros& registros){
 			cout << "El mensaje se elimino de tu bandeja correctamente." << endl;
 		
 		while(i < gestor.usuarios.contador && !existe){
-				if((buscar(gestor.usuarios.usuario[i].bandejaEntrada, id) != -1) && (buscar(gestor.usuarios.usuario[i].bandejaSalida, id) != -1))//si no existe el identificador en ninguna lista de registros de ningun usuario, entonces borramos el correo de la lista de correos
+				if((buscar(gestor.usuarios.usuario[i].bandejaEntrada, id) != -1) || (buscar(gestor.usuarios.usuario[i].bandejaSalida, id) != -1))//si no existe el identificador en ninguna lista de registros de ningun usuario, entonces borramos el correo de la lista de correos
 					existe = true;
 					i++;
 			}
