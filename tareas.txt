@@ -1,2 +1,0 @@
-
-- Falta la funcion de correoContestacion en correo.cpp

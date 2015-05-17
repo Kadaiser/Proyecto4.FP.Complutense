@@ -41,6 +41,8 @@ int opcion;
 			}	
 		}while(opcion != 0);
 		apagar(gestor);
+	system("pause");
+	return 0;
 }
 
 

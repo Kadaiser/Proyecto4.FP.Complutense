@@ -76,34 +76,20 @@ bool buscar(const tListaCorreos &correos, string id, int &pos){
 }
 
 void ordenar_AF(tListaCorreos &correos){
-	tCorreo nuevo;
-	int pos;
-
-	for (int i = 1; i < correos.contador; i++) {
-		nuevo = correos.correo[i];
-		pos = 0;
-		while ((pos < i) && !(correos.correo[pos].fecha > nuevo.fecha)) {
-			pos++;
+	bool intercambio = true;
+	int i = 0;
+	
+	while((i<correos.contador) && intercambio){
+		intercambio = false;
+		for (int j = correos.contador-1; j > i; j--){
+			if(correos.correo[j] < correos.correo[j-1]){
+				tCorreo tmp;
+				tmp = correos.correo[j];
+				correos.correo[j] = correos.correo[j-1];
+				correos.correo[j-1] = tmp;
+				intercambio = true;
+			}
 		}
-
-		for (int j = i; j > pos; j--) {
-			correos.correo[j] = correos.correo[j-1];
-		}
-
-		correos.correo[pos] = nuevo;
-	}
-
-	for (int i = 1; i < correos.contador; i++) {
-		nuevo = correos.correo[i];
-		pos = 0;
-		while ((pos < i) && !(correos.correo[pos].asunto > nuevo.asunto)) {
-			pos++;
-		}
-
-		for (int j = i; j > pos; j--) {
-			correos.correo[j] = correos.correo[j-1];
-		}
-
-		correos.correo[pos] = nuevo;
+		if (intercambio) i++;
 	}
 }

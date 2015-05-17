@@ -59,7 +59,7 @@ bool correoLeido(tListaRegistros &registros, string id){
 	int posicion = buscar(registros,id);
 	
 	if(posicion != -1){
-		registros.registro[posicion].leido = true;
+		registros.registro[posicion].leido = false;
 		check = true;
 	}	
 	return check;

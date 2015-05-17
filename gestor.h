@@ -93,7 +93,9 @@ void mostarBandeja(const tGestor & gestor, bool bEntrada);
 */
 void mostrarMenu(bool bEntrada);
 
-
+/**
+*Muestra por pantalla el menu de opciones para la contestacion de un correo
+*/
 void mostrarMenuVerCorreo();
 
 

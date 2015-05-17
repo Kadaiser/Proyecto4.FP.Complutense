@@ -1,11 +1,11 @@
 #ifndef CORREO_H
 #define CORREO_H
 
+#include "fecha.h"
+
 using namespace std;
 const string CENTINELACORREO= "XXX";
 const string CENTINELACUERPO= "X";
-
-typedef time_t tFecha;
 
 typedef struct{
 string emisor;
@@ -70,5 +70,9 @@ void correoCuerpo(string& cuerpo);
 * Funcion que recibe un correo y lo muestra por pantalla, incluyendo el asunto y el cuerpo. 
 */
 void verCorreo(tCorreo correo);
+
+bool operator< (const tCorreo & correo1, const tCorreo & correo2);
+
+void quitarRe(tCorreo & correo);
 
 #endif

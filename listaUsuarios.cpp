@@ -17,7 +17,7 @@ bool cargar(tListaUsuarios& usuarios, string dominio){
 	ifstream archivo;
 	inicializar(usuarios);
 	string nombreFichero = dominio + "_" + ficheroUsuarios;
-	
+
 	archivo.open(nombreFichero);
 	if(!archivo.is_open()){
 	ok = false;
@@ -89,12 +89,10 @@ bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion){
 
 /* Variante de ordenacion por insercion */
 void ordenarUsuarios(tListaUsuarios& usuarios){
-	int pos;
+	int pos=0;
 	tUsuario nuevo;
-
 	
 	nuevo = usuarios.usuario[usuarios.contador-1];
-	pos = 0;
 	while ((pos < usuarios.contador-1) && !(usuarios.usuario[pos].identificador > nuevo.identificador)) {
 		pos++;
 	}

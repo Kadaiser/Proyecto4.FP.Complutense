@@ -6,11 +6,9 @@
 
 using namespace std;
 
-#include "fecha.h"
 #include "correo.h"
 
 void correoNuevo(tCorreo &correo, string emisor){
-
 		correo.fecha = time(0);
 		correo.emisor= emisor;
 		correo.identificador = correo.emisor + "_" + to_string(correo.fecha);
@@ -20,6 +18,18 @@ void correoNuevo(tCorreo &correo, string emisor){
 }
 
 void correoContestacion(const tCorreo &correoOriginal, tCorreo &correo, string emisor){
+		string cuerpoRespuesta;
+		correo.fecha = time(0);
+		correo.emisor = emisor;
+		correo.identificador = correo.emisor + "_" + to_string(correo.fecha);
+		correo.destinatario = correoOriginal.emisor;
+		correo.asunto = "Re: " + correoOriginal.asunto;
+		
+		correoCuerpo(cuerpoRespuesta);
+		correo.cuerpo = cuerpoRespuesta;
+		for(int i=0; i<160;i++) correo.cuerpo += "-";
+		correo.cuerpo += obtenerCabecera(correoOriginal);
+		correo.cuerpo += correoOriginal.cuerpo;
 }
 
 string aCadena(const tCorreo &correo){
@@ -61,20 +71,8 @@ void guardar(const tCorreo &correo, ofstream& archivo){
 	archivo << correo.destinatario << endl;
 	archivo << correo.asunto << endl;
 	archivo << correo.cuerpo;
-	archivo << 'X' << endl;
+	archivo << CENTINELACUERPO << endl;
 }
-
-/*void leerCuerpo(string& cuerpo, ifstream& archivo){
-	string centinela, linea;
-	do{
-		centinela = archivo.get();
-		if(centinela != CENTINELACUERPO){
-		cuerpo += centinela;
-		getline(archivo, linea);
-		cuerpo += linea + '\n';
-		}
-	}while(centinela != CENTINELACUERPO);
-}*/
 
 void leerCuerpo(string& cuerpo, ifstream& archivo){
 	string linea = "";
@@ -117,4 +115,28 @@ void verCorreo(tCorreo correo){
 	cadena = aCadena(correo);
 
 	cout << cabecera << cadena << endl;
+}
+
+bool operator< (const tCorreo & correo1, const tCorreo & correo2){
+	bool esMenor = true;
+	tCorreo correo1aux = correo1;
+	tCorreo correo2aux = correo2;
+	
+	quitarRe(correo1aux);
+	quitarRe(correo2aux);
+	
+		if(correo2aux.asunto < correo1aux.asunto)
+			esMenor = false;
+		else if(correo2aux.asunto == correo1aux.asunto){
+			if(correo2aux.fecha < correo1aux.fecha)
+				esMenor = false;
+			}
+	return esMenor;
+}
+
+void quitarRe(tCorreo & correo){
+	string asuntoAux = correo.asunto;
+	if(asuntoAux.substr (0,4) == "Re: ")
+	asuntoAux.erase (0,4);
+	correo.asunto = asuntoAux;
 }
