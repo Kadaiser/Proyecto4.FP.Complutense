@@ -37,6 +37,8 @@ void guardar(const tListaCorreos &correos, string dominio);
 */
 bool insertar(tListaCorreos &correos, const tCorreo &correo);
 
+bool borrar(tListaCorreos &correos, string id);
+
 /**
 * Dado un identificador de correo y la lista, devuelve, si dicho identificador existe en la lista, su posición y el valor true, 
 * y si no existe en la lista, la posición que le correspondería y el valor false.

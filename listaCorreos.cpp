@@ -60,6 +60,20 @@ bool insertar(tListaCorreos &correos, const tCorreo &correo){
 	return ok;
 }
 
+bool borrar(tListaCorreos &correos, string id){
+	bool borrado = false;
+	int posicion;
+	buscar(correos, id , posicion);
+	if(posicion != -1){
+				for (posicion; posicion < correos.contador; posicion++){
+			correos.correo[posicion] = correos.correo[posicion+1];
+		}
+		correos.contador--;
+		borrado = true;
+	}
+return borrado;
+}
+
 bool buscar(const tListaCorreos &correos, string id, int &pos){
 	bool encontrado = false;
 

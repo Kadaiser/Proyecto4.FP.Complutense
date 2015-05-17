@@ -100,18 +100,16 @@ void leerCorreo(tGestor& gestor, tListaRegistros& registros){
 	system("cls");
 	
 	if (numCorreo > 0 && numCorreo <= registros.contador){
-		correoLeido(registros, registros.registro[numCorreo-1].identificador); //Al acceder a un correo siempre en la posicion n-1 respecto de lo que el usuario ve en la lista, se marca como leido
-		//registros.registro[numCorreo-1].leido = false;
+		correoLeido(registros, registros.registro[numCorreo-1].identificador); //Al acceder a un correo siempre en la posicion n-1 respecto de lo que el usuario ve en la lista, se marca como leid
 		buscar(gestor.correos, registros.registro[numCorreo-1].identificador, pos);	//Buscar correo en la lista de correos
 		verCorreo(gestor.correos.correo[pos]); //Se muestra el contenido del correo
-		do{
-			mostrarMenuVerCorreo();	//Se muestra el menu de opciones d ela lectura de correos
-			cin >> opcion;
-			if (opcion == 1){
-				correoContestacion (gestor.correos.correo[pos], correoRespondido, gestor.correos.correo[pos].destinatario);	//Se puede enviar una respuesta (Re:) al emisor; 
-				enviarCorreo(gestor, correoRespondido);
-			}
-		}while(opcion != 0);
+		mostrarMenuVerCorreo();	//Se muestra el menu de opciones d ela lectura de correos
+		cin >> opcion;
+		
+		if (opcion == 1){
+			correoContestacion (gestor.correos.correo[pos], correoRespondido, gestor.correos.correo[pos].destinatario);	//Se puede enviar una respuesta (Re:) al emisor; 
+			enviarCorreo(gestor, correoRespondido);
+		}
 	}
 }
 
@@ -144,17 +142,30 @@ void enviarCorreo(tGestor& gestor, const tCorreo &correo){
 
 void borrarCorreo(tGestor& gestor, tListaRegistros& registros){
 	int numCorreo;
-
+	int i = 0;
+	string id;
+	bool existe = false;
 	cout << "Introduzca el numero correo a borrar: ";
 	cin >> numCorreo;
 
-	if (numCorreo > 0 && numCorreo < registros.contador){			
-		if(borrar(registros, registros.registro[numCorreo - 1].identificador))
+	if (numCorreo > 0 && numCorreo <= registros.contador){
+		id = registros.registro[numCorreo - 1].identificador;
+		if(borrar(registros, registros.registro[numCorreo - 1].identificador)){
 			cout << "El mensaje se elimino de tu bandeja correctamente." << endl;
+			
+			while(i < gestor.usuarios.contador && !existe){
+				if((buscar(gestor.usuarios.usuario[i].bandejaEntrada, id) != -1) && (buscar(gestor.usuarios.usuario[i].bandejaSalida, id) != -1)){ //si no existe el identificador en ninguna lista de registros de ningun usuario, entonces borramos el correo de la lista de correos
+					existe = true;
+				}
+				i++;
+			}
+					if(!existe && borrar(gestor.correos, id))
+					cout << "Tambien ha sido elmininado de la base de datos" << endl;
+		}
+	}
 		else
 			cout << "Correo inexistente." << endl;
-	}
-	
+	system("pause");
 }
 
 
@@ -169,7 +180,7 @@ void lecturaRapida(tGestor& gestor, tListaRegistros& listaReg){
 		if (!listaReg.registro[i].leido){
 			buscar(gestor.correos, listaReg.registro[i].identificador, pos);	
 			verCorreo(gestor.correos.correo[pos]);
-			listaReg.registro[i].leido = false;
+			listaReg.registro[i].leido = true;
 			lineaIntercalada();
 		}
 	}
@@ -244,7 +255,7 @@ void mostarBandeja(const tGestor & gestor, bool bEntrada){
 
 	if(bEntrada){
 		for(int i =  0; i< usuario.bandejaEntrada.contador; i++){
-			if(!usuario.bandejaEntrada.registro[i].leido) cout << " ";
+			if(usuario.bandejaEntrada.registro[i].leido) cout << " ";
 			else cout << "*";
 			if (buscar(gestor.correos, usuario.bandejaEntrada.registro[i].identificador, pos)){
 				cout << setw(2) << i+1 << " " << gestor.correos.correo[pos].emisor << setw(25) << gestor.correos.correo[pos].asunto << setw(30) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;

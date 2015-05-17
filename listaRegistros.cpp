@@ -45,8 +45,8 @@ bool borrar(tListaRegistros &registros, string id){
 	bool borrado = false;
 	int posicion = buscar(registros,id);
 	if(posicion != -1){
-				for (posicion; posicion < registros.contador; posicion++){
-			registros.registro[posicion] = registros.registro[posicion+1];
+			for (posicion; posicion < registros.contador; posicion++){
+				registros.registro[posicion] = registros.registro[posicion+1];
 		}
 		registros.contador--;
 		borrado = true;
@@ -57,14 +57,13 @@ return borrado;
 bool correoLeido(tListaRegistros &registros, string id){
 	bool check = false;
 	int posicion = buscar(registros,id);
-	
+
 	if(posicion != -1){
-		registros.registro[posicion].leido = false;
+		registros.registro[posicion].leido = true;
 		check = true;
 	}	
 	return check;
 }
-
 
 int buscar(const tListaRegistros &registros, string id){
 	int posicion;
