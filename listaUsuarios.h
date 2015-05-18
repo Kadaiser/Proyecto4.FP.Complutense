@@ -42,7 +42,9 @@ bool aniadir(tListaUsuarios& usuarios, const tUsuario& usuario);
 */
 bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion);
 
-
+/**
+* Dada una lista de usuarios, ordena los elementos alfabeticamente
+*/
 void ordenarUsuarios(tListaUsuarios& usuarios);
 
 

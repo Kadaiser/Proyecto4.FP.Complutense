@@ -119,11 +119,11 @@ void enviarCorreo(tGestor& gestor, const tCorreo &correo){
 	tRegistro registro;
 	int pos;
 
-	if (insertar(gestor.correos, correo)){
-		registro.leido = true;
-		registro.identificador = correo.identificador;
-		if (insertar(gestor.usuarios.usuario[gestor.usuarioActivo].bandejaSalida, registro)){
-			if (buscarUsuario(gestor.usuarios, correo.destinatario, pos)){				
+	if (buscarUsuario(gestor.usuarios, correo.destinatario, pos)){
+		if(insertar(gestor.correos, correo)){
+			registro.leido = false;
+			registro.identificador = correo.identificador;	
+			if (insertar(gestor.usuarios.usuario[gestor.usuarioActivo].bandejaSalida, registro)){			
 				if (insertar(gestor.usuarios.usuario[pos].bandejaEntrada, registro)){
 					cout << "Correo enviado correctamente." << endl;
 				}
@@ -131,11 +131,12 @@ void enviarCorreo(tGestor& gestor, const tCorreo &correo){
 					cout << "Bandeja de correo de destinatario llena!!!" << endl;
 				}
 			}
-			else{
-				cout << "Destinatario no encontrado" << endl;
-			}
 		}
+		else
+			cout << "Bandeja de salida de emisor llena!!" << endl;
 	}
+	else
+		cout << "Destinatario no encontrado" << endl;
 }
 
 

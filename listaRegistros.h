@@ -20,7 +20,6 @@ int contador;
 */
 void inicializar(tListaRegistros &registros);
 
-
 /**
 * Dado un flujo de archivo de entrada (ya abierto), 
 * lee los datos que corresponden a una lista de registros y la devuelve.
@@ -57,5 +56,8 @@ bool correoLeido(tListaRegistros &registros, string id);
 */
 int buscar(const tListaRegistros &registros, string id);
 
+/**
+*  Dado un flujo de archivo de entrada (ya abierto),  cargar los datos en la estrucutra de un registro
+*/
 void cargarRegistro(tRegistro& registro, ifstream& archivo);
 #endif
