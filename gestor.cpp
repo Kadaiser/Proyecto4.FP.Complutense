@@ -157,7 +157,7 @@ void borrarCorreo(tGestor& gestor, tListaRegistros& registros){
 	cout << "Introduzca el numero del correo de la lista que quiere borrar: ";
 	cin >> numCorreo;
 
-	if (numCorreo > 0 && numCorreo < registros.contador){
+	if (numCorreo > 0 && numCorreo <= registros.contador){
 		id = registros.registro[numCorreo - 1].identificador;  //Se requiere para el posterior chequeo a la hora de eliminar el correo de la lista
 		if(borrar(registros, registros.registro[numCorreo - 1].identificador)){
 			cout << "El mensaje se elimino de tu bandeja correctamente." << endl;
