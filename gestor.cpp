@@ -232,14 +232,18 @@ void gestionarSesion(tGestor& gestor){
 void mostrarInterfazUsuario(tGestor& gestor, bool bEntrada){
 	system("cls");
 	cout << "correo de " << gestor.usuarios.usuario[gestor.usuarioActivo].identificador << endl;
-	for(int i=0; i<30;i++) cout << "-";
+	for(int i=0; i<30;i++) cout << "=";
 	cout << "Bandeja de ";
 		if(bEntrada) cout << "entrada";
-		else cout << "salida-";
-	for(int i=0; i<32;i++) cout << "-";
+		else cout << "salida=";
+	for(int i=0; i<32;i++) cout << "=";
 	
 	lineaIntercalada();
-	cout <<"L" << setw(2) << "N" << setw(10) << "EMISOR" << setw(25) << "ASUNTO" << setw(40) << "FECHA" << endl;
+	if(bEntrada){
+		cout <<"L" << setw(2) << "N" << setw(10) << "EMISOR" << setw(30) << "ASUNTO" << setw(35) << "FECHA" << endl;
+	}
+	else
+		cout <<"L" << setw(2) << "N" << setw(15) << "DESTINATARIO" << setw(25) << "ASUNTO" << setw(35) << "FECHA" << endl;
 	lineaIntercalada();
 
 	mostarBandeja(gestor, bEntrada);
@@ -258,14 +262,14 @@ void mostarBandeja(const tGestor & gestor, bool bEntrada){
 			if(usuario.bandejaEntrada.registro[i].leido) cout << " ";
 			else cout << "*";
 			if (buscar(gestor.correos, usuario.bandejaEntrada.registro[i].identificador, pos)){
-				cout << setw(2) << i+1 << " " << gestor.correos.correo[pos].emisor << setw(25) << gestor.correos.correo[pos].asunto << setw(30) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
+				cout << setw(2) << i+1 << " "  << gestor.correos.correo[pos].emisor << setw(25) << gestor.correos.correo[pos].asunto << setw(25) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
 			}
 		}
 	}
 	else{
 		for(int i =0; i < usuario.bandejaSalida.contador; i++){
 			if (buscar(gestor.correos, usuario.bandejaSalida.registro[i].identificador, pos)){
-				cout << " " << setw(2) << i+1 << " " << gestor.correos.correo[pos].destinatario << setw(25) << gestor.correos.correo[pos].asunto << setw(30) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
+				cout << " " << setw(2) << i+1 << " "  << gestor.correos.correo[pos].destinatario << setw(25) << gestor.correos.correo[pos].asunto << setw(25) << mostrarSoloDia(gestor.correos.correo[pos].fecha) << endl;
 			}
 		}
 	}
@@ -295,5 +299,5 @@ void mostrarMenuVerCorreo(){
 }
 
 void lineaIntercalada(){
-	for(int i=0; i<80;i++) cout << "-";
+	for(int i=0; i<80;i++) cout << "=";
 }

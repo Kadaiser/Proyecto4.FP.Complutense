@@ -27,7 +27,7 @@ void correoContestacion(const tCorreo &correoOriginal, tCorreo &correo, string e
 		
 		correoCuerpo(cuerpoRespuesta);
 		correo.cuerpo = cuerpoRespuesta;
-		for(int i=0; i<160;i++) correo.cuerpo += "-";
+		for(int i=0; i<80;i++) correo.cuerpo += "-";
 		correo.cuerpo += obtenerCabecera(correoOriginal);
 		correo.cuerpo += correoOriginal.cuerpo;
 }
