@@ -100,7 +100,7 @@ void mostrarMenuVerCorreo();
 
 
 /**
-* Genera una linea horizontal de guiones diseñada para ocupar la longitud por defecto de una consola de sistema de windows
+* Genera una linea horizontal de "=" diseñada para ocupar la longitud por defecto de una consola de sistema de windows
 */
 void lineaIntercalada();
 

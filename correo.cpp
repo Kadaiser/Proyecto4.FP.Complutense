@@ -33,7 +33,11 @@ void correoContestacion(const tCorreo &correoOriginal, tCorreo &correo, string e
 }
 
 string aCadena(const tCorreo &correo){
-	return correo.cuerpo;
+	string aCorreo, cadena;
+
+	aCorreo = obtenerCabecera(correo);
+	aCorreo += correo.cuerpo;
+	return aCorreo;
 }
 
 string obtenerCabecera(const tCorreo &correo){
@@ -48,6 +52,7 @@ string obtenerCabecera(const tCorreo &correo){
 }
 
 bool cargar(tCorreo &correo, ifstream& archivo){
+
 	bool ok= true;
 	string cuerpo, fecha;
 	
@@ -108,14 +113,6 @@ void correoCuerpo(string& cuerpo){
 	cuerpo=flujo.str();
 }
 
-void verCorreo(tCorreo correo){
-	string cabecera, cadena;
-
-	cabecera = obtenerCabecera(correo);
-	cadena = aCadena(correo);
-
-	cout << cabecera << cadena << endl;
-}
 
 bool operator< (const tCorreo & correo1, const tCorreo & correo2){
 	bool esMenor = true;
@@ -136,7 +133,10 @@ bool operator< (const tCorreo & correo1, const tCorreo & correo2){
 
 void quitarRe(tCorreo & correo){
 	string asuntoAux = correo.asunto;
-	if(asuntoAux.substr (0,4) == "Re: ")
+	bool esRespuesta =(asuntoAux.substr (0,4) == "Re: ");
+	while(esRespuesta){
 	asuntoAux.erase (0,4);
+	esRespuesta =(asuntoAux.substr (0,4) == "Re: ");
+	}
 	correo.asunto = asuntoAux;
 }

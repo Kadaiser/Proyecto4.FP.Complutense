@@ -102,7 +102,7 @@ void leerCorreo(tGestor& gestor, tListaRegistros& registros){
 	if (numCorreo > 0 && numCorreo <= registros.contador){
 		correoLeido(registros, registros.registro[numCorreo-1].identificador); //Al acceder a un correo siempre en la posicion n-1 respecto de lo que el usuario ve en la lista, se marca como leid
 		buscar(gestor.correos, registros.registro[numCorreo-1].identificador, pos);	//Buscar correo en la lista de correos
-		verCorreo(gestor.correos.correo[pos]); //Se muestra el contenido del correo
+		cout << aCadena(gestor.correos.correo[pos]); //Se muestra el contenido del correo
 		mostrarMenuVerCorreo();	//Se muestra el menu de opciones d ela lectura de correos
 		cin >> opcion;
 		
@@ -121,9 +121,10 @@ void enviarCorreo(tGestor& gestor, const tCorreo &correo){
 
 	if (buscarUsuario(gestor.usuarios, correo.destinatario, pos)){
 		if(insertar(gestor.correos, correo)){
-			registro.leido = false;
+			registro.leido = true;
 			registro.identificador = correo.identificador;	
-			if (insertar(gestor.usuarios.usuario[gestor.usuarioActivo].bandejaSalida, registro)){			
+			if (insertar(gestor.usuarios.usuario[gestor.usuarioActivo].bandejaSalida, registro)){
+				registro.leido = false;
 				if (insertar(gestor.usuarios.usuario[pos].bandejaEntrada, registro)){
 					cout << "Correo enviado correctamente." << endl;
 				}
@@ -169,18 +170,18 @@ void borrarCorreo(tGestor& gestor, tListaRegistros& registros){
 }
 
 
-void lecturaRapida(tGestor& gestor, tListaRegistros& listaReg){
+void lecturaRapida(tGestor& gestor, tListaRegistros& registros){
 	int pos;
 	system("cls");
 
 	ordenar_AF(gestor.correos);
 
-	for (int i = 0; i<listaReg.contador; i++){
+	for (int i = 0; i<registros.contador; i++){
 
-		if (!listaReg.registro[i].leido){
-			buscar(gestor.correos, listaReg.registro[i].identificador, pos);	
-			verCorreo(gestor.correos.correo[pos]);
-			listaReg.registro[i].leido = true;
+		if (!registros.registro[i].leido){
+			buscar(gestor.correos, registros.registro[i].identificador, pos);	
+			cout << aCadena(gestor.correos.correo[pos]);
+			correoLeido(gestor.usuarios.usuario[gestor.usuarioActivo].bandejaEntrada, registros.registro[i].identificador);
 			lineaIntercalada();
 		}
 	}

@@ -27,7 +27,8 @@ void correoNuevo(tCorreo &correo, string emisor);
 void correoContestacion(const tCorreo &correoOriginal, tCorreo &correo, string emisor);
 
 /**
-* Devuelve un string con el contenido completo del correo para poderlo mostrar por consola
+* Devuelve un string con el contenido completo del correo para poderlo mostrar por consola,
+
 */
 string aCadena(const tCorreo &correo);
 
@@ -66,13 +67,16 @@ void correoAsunto(string& asunto);
 */
 void correoCuerpo(string& cuerpo);
 
-/** 
-* Funcion que recibe un correo y lo muestra por pantalla, incluyendo el asunto y el cuerpo. 
+/**
+* Funcion que recibe dos correos y devuelve true, si el primer correo es mayor que el segundo
+* Se considera mayor un correo que otro si en caso de se tener el mismo asunto (no se tiene en cuenta que un asunto empiece por "Re: ")
+* se ordenan por fecha de creacion.
 */
-void verCorreo(tCorreo correo);
-
 bool operator< (const tCorreo & correo1, const tCorreo & correo2);
 
+/**
+* Funcion que recibe u correo elimina la concatenacion "Re: " del asunto en caso de que lo hubiere 
+*/
 void quitarRe(tCorreo & correo);
 
 #endif
