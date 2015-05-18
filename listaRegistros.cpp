@@ -44,9 +44,9 @@ bool insertar(tListaRegistros &registros, tRegistro registro){
 bool borrar(tListaRegistros &registros, string id){
 	bool borrado = false;
 	int posicion = buscar(registros,id);
-	if(posicion != -1){
+	if(posicion != -1){	//Si se encuentra el registro se elimina 
 			for (posicion; posicion < registros.contador; posicion++){
-				registros.registro[posicion] = registros.registro[posicion+1];
+				registros.registro[posicion] = registros.registro[posicion+1]; //Desde la posicion elminada se desplazan una posicion a la izquierda
 		}
 		registros.contador--;
 		borrado = true;
@@ -75,10 +75,10 @@ int buscar(const tListaRegistros &registros, string id){
 		mitad = (ini+fin) / 2;
 
 		if(id < registros.registro[mitad].identificador){
-		fin = mitad - 1;
+		fin = mitad - 1;			//acoto la busqueda por la derecha
 		}
 		else if(registros.registro[mitad].identificador < id){
-		ini = mitad + 1;
+		ini = mitad + 1;			//acoto la busqueda por la izquierda
 		}
 		else{
 		encontrado = true;

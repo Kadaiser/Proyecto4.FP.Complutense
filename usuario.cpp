@@ -24,9 +24,13 @@ void guardar(const tUsuario& usuario, ofstream& archivo){
 	archivo << usuario.identificador << endl;
 	archivo << usuario.contrasenia<< endl;
 	archivo << usuario.bandejaEntrada.contador<< endl;
-	if(usuario.bandejaEntrada.contador != 0) guardar(usuario.bandejaEntrada, archivo);
+	if(usuario.bandejaEntrada.contador != 0){		//si 0 no se almacena ningun registro
+		guardar(usuario.bandejaEntrada, archivo);
+	}
 	archivo << usuario.bandejaSalida.contador<< endl;
-	if(usuario.bandejaSalida.contador != 0)	guardar(usuario.bandejaSalida, archivo);
+	if(usuario.bandejaSalida.contador != 0){		//si 0 no se almacena ningun registro	
+	guardar(usuario.bandejaSalida, archivo);
+	}
 }
 
 void inicializar(tUsuario& usuario, string id, string contrasenia){

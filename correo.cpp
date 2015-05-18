@@ -18,7 +18,7 @@ void correoNuevo(tCorreo &correo, string emisor){
 }
 
 void correoContestacion(const tCorreo &correoOriginal, tCorreo &correo, string emisor){
-		string cuerpoRespuesta;
+		string cuerpoRespuesta; //la respuesta del usuario a un correo se concatenara en un unico string junto el anterior mensaje
 		correo.fecha = time(0);
 		correo.emisor = emisor;
 		correo.identificador = correo.emisor + "_" + to_string(correo.fecha);
@@ -27,7 +27,7 @@ void correoContestacion(const tCorreo &correoOriginal, tCorreo &correo, string e
 		
 		correoCuerpo(cuerpoRespuesta);
 		correo.cuerpo = cuerpoRespuesta;
-		for(int i=0; i<80;i++) correo.cuerpo += "-";
+		for(int i=0; i<80;i++) correo.cuerpo += "-"; //se incorpora una linea separatoria del anterior correo y la constestacion
 		correo.cuerpo += obtenerCabecera(correoOriginal);
 		correo.cuerpo += correoOriginal.cuerpo;
 }
@@ -36,7 +36,7 @@ string aCadena(const tCorreo &correo){
 	string aCorreo, cadena;
 
 	aCorreo = obtenerCabecera(correo);
-	aCorreo += correo.cuerpo;
+	aCorreo += correo.cuerpo; //se concatena toda la informacion del correo en un unico string
 	return aCorreo;
 }
 
@@ -108,8 +108,10 @@ void correoCuerpo(string& cuerpo){
 	cout << "Escribe tu mensaje (XXX para terminar): " << endl;
 		do{
 			getline(cin, linea);
-			if(linea != CENTINELACORREO)flujo << linea << endl;
-		}while(linea != CENTINELACORREO);
+			if(linea != CENTINELACORREO){
+				flujo << linea << endl;
+			}
+		}while(linea != CENTINELACORREO); //El centinela sera reconocido UNICAMENTE en una linea que SOLO contenga el centinela
 	cuerpo=flujo.str();
 }
 
@@ -120,7 +122,7 @@ bool operator< (const tCorreo & correo1, const tCorreo & correo2){
 	tCorreo correo2aux = correo2;
 	
 	quitarRe(correo1aux);
-	quitarRe(correo2aux);
+	quitarRe(correo2aux);//Se generan copias auxliares para poder eliminar los "Re: " de los asuntos
 	
 		if(correo2aux.asunto < correo1aux.asunto)
 			esMenor = false;
@@ -134,9 +136,10 @@ bool operator< (const tCorreo & correo1, const tCorreo & correo2){
 void quitarRe(tCorreo & correo){
 	string asuntoAux = correo.asunto;
 	bool esRespuesta =(asuntoAux.substr (0,4) == "Re: ");
-	while(esRespuesta){
-	asuntoAux.erase (0,4);
-	esRespuesta =(asuntoAux.substr (0,4) == "Re: ");
+	
+	while(esRespuesta){ //minetras se identifique el patron "Re: " en los primeros 4 caracteres del string
+	asuntoAux.erase (0,4); //Se elimina "Re: "
+	esRespuesta =(asuntoAux.substr (0,4) == "Re: "); 
 	}
-	correo.asunto = asuntoAux;
+	correo.asunto = asuntoAux; //Se sustitulle el anterior asunto por el nuevo sin "Re: "
 }

@@ -11,7 +11,6 @@ void inicializar(tListaUsuarios &usuarios){
 	usuarios.contador=0;
 }
 
-
 bool cargar(tListaUsuarios& usuarios, string dominio){
 	bool ok;
 	ifstream archivo;
@@ -58,7 +57,7 @@ bool aniadir(tListaUsuarios& usuarios, const tUsuario& usuario){
 	if(usuarios.contador < MAXUSUARIOS){
 		usuarios.usuario[usuarios.contador]= usuario;
 		usuarios.contador++;
-		ordenarUsuarios(usuarios);
+		ordenarUsuarios(usuarios);	//Se ordenan los usuarios por orden alfabetico
 		ok = true;
 	}
 	return ok;
@@ -72,22 +71,22 @@ bool buscarUsuario(const tListaUsuarios& usuarios, string id, int& posicion){
 		mitad = (ini+fin) / 2;
 
 		if(id < usuarios.usuario[mitad].identificador){
-		fin = mitad - 1;
+		fin = mitad - 1;	//acotar la busqueda por la derecha
 		}
 		else if(usuarios.usuario[mitad].identificador < id){
-		ini = mitad + 1;
+		ini = mitad + 1;	//acotar la busqueda por la izquierda
 		}
 		else{
-		encontrado = true;
+		encontrado = true;	//si no esta a la derecha ni a la izquierda, es el buscado
 		}
 	}
 	if(encontrado) posicion = mitad;
-	else posicion = ini;
+	else posicion = ini;	//En caso de no encontrarse, esta seria su posicion
 	
 	return encontrado;
 }
 
-/* Variante de ordenacion por insercion */
+// Variante de ordenacion por insercion 
 void ordenarUsuarios(tListaUsuarios& usuarios){
 	int pos=0;
 	tUsuario nuevo;

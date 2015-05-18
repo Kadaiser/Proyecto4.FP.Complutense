@@ -1,1 +1,24 @@
+arturo@fdimail.com
+arturo
+0
+3
+arturo@fdimail.com_1427138732	1
+arturo@fdimail.com_1427138813	1
+arturo@fdimail.com_1427138886	1
+ginebra@fdimail.com
+ginebra
+3
+arturo@fdimail.com_1427138813	0
+arturo@fdimail.com_1427138886	0
+lancelot@fdimail.com_1427139037	0
+1
+ginebra@fdimail.com_1431712425	1
+lancelot@fdimail.com
+lancelot
+3
+arturo@fdimail.com_1427138732	1
+arturo@fdimail.com_1427138886	1
+ginebra@fdimail.com_1431712425	1
+1
+lancelot@fdimail.com_1427139037	1
 XXX
