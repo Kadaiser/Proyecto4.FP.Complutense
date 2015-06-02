@@ -1,3 +1,12 @@
+
+/**
+Aplicacion creada para el curso de FP de primer año
+Facultad de informatica de la complutense
+autores:
+Diego valbuena Pineda
+Julio De la Cruz Valderrama
+*/
+
 #include <iostream>
 #include <fstream>
 #include <Windows.h>
